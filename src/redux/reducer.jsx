@@ -1,13 +1,19 @@
 const initialState = {
-  users: [
-    { name: "Mazen", email: "m.chaouch007@gmail.com", phone: "55 234 543" },
-  ],
+  users: [],
+  loading: false,
+  error: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "": {
-      return;
+    case "fetchUsersLoading": {
+      return { ...state, loading: true };
+    }
+    case "fetchUsersSuccess": {
+      return { ...state, users: action.payload, loading: false };
+    }
+    case "fetchUsersError": {
+      return { ...state, loading: false, error: action.payload };
     }
     default:
       return state;
